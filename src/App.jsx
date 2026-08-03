@@ -118,7 +118,7 @@ const conferencePubs = [
   },
   {
     year: '2026',
-    venue: 'ACM FAccT',
+    venue: 'Preprint',
     title: 'Can LLMs Understand What We Cannot Say? Measuring Multilevel Alignment Through Abortion Stigma',
     authors: 'Anika Sharma, Malavika Mampally, Chidaksh Ravuru, Kandyce Brennan, Neil Gaikwad',
     link: 'https://arxiv.org/pdf/2512.13142',
@@ -276,7 +276,7 @@ const App = () => {
               Advancing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Reliable & Aligned</span> AI
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
-              AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable — causal verification of spurious shortcuts (<strong className="text-gray-900">UNMASK, COLM 2026</strong>), statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. MS CS from UNC Chapel Hill, advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong> — published at COLM, KDD, and ACM FAccT.
+              AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable — causal verification of spurious shortcuts (<strong className="text-gray-900">UNMASK, COLM 2026</strong>), statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. MS CS from UNC Chapel Hill, advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong> — published at COLM and KDD.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <a href="mailto:chidakshravuru@gmail.com" className="bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl shadow-gray-200 flex items-center gap-3">
@@ -343,7 +343,7 @@ const App = () => {
             },
             {
               date: 'Jan 2024 - May 2024',
-              role: 'Research Assistant',
+              role: 'Machine Learning Intern — Video Understanding',
               company: 'Indian Institute of Technology, Delhi',
               points: [
                 'Managed data design, collection, and evaluation for video-face recognition research in law enforcement scenarios.',
@@ -397,7 +397,7 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="gallium — LLM-as-Judge Evaluation with Statistical Rigor"
+            title="LLM-as-Judge Evaluation with Statistical Rigor"
             date="2026"
             org="Evaluation Methodology"
             description={[
