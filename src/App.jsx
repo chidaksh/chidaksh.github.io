@@ -286,17 +286,17 @@ const App = () => {
                 <FileDown size={20} /> Resume / CV
               </a>
               <div className="flex gap-2">
-                {socialLinks.map(({ label, url, Icon }) => (
+                {socialLinks.map(social => (
                   <a
-                    key={label}
-                    href={url}
+                    key={social.label}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
-                    title={label}
+                    aria-label={social.label}
+                    title={social.label}
                     className="p-4 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-2xl transition-all border border-gray-100"
                   >
-                    <Icon size={20} />
+                    <social.Icon size={20} />
                   </a>
                 ))}
               </div>
@@ -713,17 +713,17 @@ const App = () => {
               </a>
             </div>
             <div className="flex justify-center gap-4">
-              {socialLinks.map(({ label, url, Icon }) => (
+              {socialLinks.map(social => (
                 <a
-                  key={label}
-                  href={url}
+                  key={social.label}
+                  href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={label}
-                  title={label}
+                  aria-label={social.label}
+                  title={social.label}
                   className="p-4 text-gray-500 hover:text-blue-400 hover:bg-white/5 rounded-2xl transition-all"
                 >
-                  <Icon size={22} />
+                  <social.Icon size={22} />
                 </a>
               ))}
             </div>
