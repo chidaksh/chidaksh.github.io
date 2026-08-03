@@ -304,7 +304,7 @@ const App = () => {
           </div>
           <div className="md:col-span-2 hidden md:block">
             <div className="relative aspect-[4/5] bg-gray-50 rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl">
-              <img src="/profile.jpg" alt="Chidaksh Ravuru" width="800" height="1000" className="w-full h-full object-cover" />
+              <img src="/profile.webp" alt="Chidaksh Ravuru" width="800" height="1067" loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

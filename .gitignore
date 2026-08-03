@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scratch copy of the deployed stylesheet, pulled for comparison
+livecss.css
