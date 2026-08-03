@@ -4,7 +4,8 @@
   animation-delay: 2s;
 }
 
+/* Dots are dark: this grid sits on the light hero background. */
 @utility dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(15,23,42,0.07) 1px, transparent 1px);
   background-size: 24px 24px;
 }
