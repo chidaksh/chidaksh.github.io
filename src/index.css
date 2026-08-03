@@ -3,3 +3,8 @@
 @utility animation-delay-2000 {
   animation-delay: 2s;
 }
+
+@utility dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
