@@ -273,7 +273,7 @@ const App = () => {
               Open to Research &amp; Industry Roles
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-8 leading-tight">
-              Evaluating <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Reliable & Aligned</span> AI
+              Advancing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Reliable & Aligned</span> AI
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
               AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable — causal verification of spurious shortcuts (<strong className="text-gray-900">UNMASK, COLM 2026</strong>), statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. MS CS from UNC Chapel Hill, advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong> — published at COLM, KDD, and ACM FAccT.
@@ -595,7 +595,8 @@ const App = () => {
           <h3 className="text-xl font-bold text-gray-900 mb-8 text-center flex items-center justify-center gap-2">
             <Trophy size={22} className="text-blue-600" /> Awards & Recognition
           </h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          {/* Flex rather than grid so a partial last row stays centered. */}
+          <div className="flex flex-wrap justify-center gap-6">
             {[
               {
                 title: 'EleutherAI SOAR Fellow',
@@ -623,7 +624,7 @@ const App = () => {
                 year: '2022'
               }
             ].map((award, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-blue-100 shadow-sm text-center">
+              <div key={i} className="w-full md:w-[calc(33.333%-1rem)] bg-white p-6 rounded-2xl border border-blue-100 shadow-sm text-center">
                 <p className="text-blue-600 font-black text-lg mb-1">{award.title}</p>
                 <p className="text-gray-600 text-sm">{award.detail}</p>
                 <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mt-2 font-mono">{award.year}</p>
