@@ -183,7 +183,7 @@ const App = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      const sections = ['about', 'experience', 'projects', 'research', 'teaching', 'skills', 'contact'];
+      const sections = ['about', 'experience', 'research', 'projects', 'teaching', 'skills', 'contact'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -201,8 +201,8 @@ const App = () => {
   const navItems = [
     { label: 'About', href: '#about', id: 'about' },
     { label: 'Experience', href: '#experience', id: 'experience' },
-    { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'Research', href: '#research', id: 'research' },
+    { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'Teaching', href: '#teaching', id: 'teaching' },
     { label: 'Skills', href: '#skills', id: 'skills' },
     { label: 'Contact', href: '#contact', id: 'contact' },
@@ -381,6 +381,19 @@ const App = () => {
         </div>
       </Section>
 
+      {/* Research Section — placed before Projects so publications are the
+          first substantive block a visitor scrolls into. */}
+      <Section id="research" title="Research & Publications">
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Conference & Journal Papers</h3>
+        <div className="grid gap-6 mb-16">
+          {conferencePubs.map((pub, idx) => <PubCard key={idx} pub={pub} />)}
+        </div>
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Workshop Papers</h3>
+        <div className="grid gap-6">
+          {workshopPubs.map((pub, idx) => <PubCard key={idx} pub={pub} />)}
+        </div>
+      </Section>
+
       {/* Featured Projects */}
       <Section id="projects" title="Core Projects">
         <div className="grid md:grid-cols-2 gap-8">
@@ -423,7 +436,7 @@ const App = () => {
             date="2026"
             org="EleutherAI SOAR"
             description={[
-              "Building a coverage-based diagnostic suite within an EleutherAI research pod, advised by Gonçalo Paulo (SPAR), evaluating whether hierarchy-recovery methods (Matryoshka SAEs, Temporal SAEs, Temporal Feature Analysis) produce coherent parent-child feature structures on Gemma-2-2B.",
+              "Building a coverage-based diagnostic suite within an EleutherAI research pod, advised by Gonçalo Paulo, evaluating whether hierarchy-recovery methods (Matryoshka SAEs, Temporal SAEs, Temporal Feature Analysis) produce coherent parent-child feature structures on Gemma-2-2B.",
               "Designing controlled PCFG experiments with tunable distributional properties to isolate which properties of natural language cause hierarchy recovery to fail, benchmarking SAEs trained on PCFG transformer activations against TinyStories and Gemma Scope."
             ]}
           />
@@ -502,18 +515,6 @@ const App = () => {
         </div>
       </Section>
 
-      {/* Research Section */}
-      <Section id="research" title="Research & Publications">
-        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Conference & Journal Papers</h3>
-        <div className="grid gap-6 mb-16">
-          {conferencePubs.map((pub, idx) => <PubCard key={idx} pub={pub} />)}
-        </div>
-        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Workshop Papers</h3>
-        <div className="grid gap-6">
-          {workshopPubs.map((pub, idx) => <PubCard key={idx} pub={pub} />)}
-        </div>
-      </Section>
-
       {/* Teaching & Service Section */}
       <Section id="teaching" title="Teaching & Service">
         <div className="grid md:grid-cols-2 gap-12">
@@ -559,10 +560,10 @@ const App = () => {
               <h4 className="font-bold text-gray-900 mb-4">Conference Reviewer</h4>
               <div className="space-y-3">
                 {[
-                  { venue: 'ACL', full: 'Association for Computational Linguistics' },
                   { venue: 'EMNLP', full: 'Empirical Methods in Natural Language Processing' },
                   { venue: 'ICLR', full: 'International Conference on Learning Representations' },
-                  { venue: 'COLM', full: 'Conference on Language Modeling' }
+                  { venue: 'COLM', full: 'Conference on Language Modeling' },
+                  { venue: 'AIES', full: 'AAAI/ACM Conference on AI, Ethics, and Society' }
                 ].map((r, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></div>
@@ -600,7 +601,7 @@ const App = () => {
             {[
               {
                 title: 'EleutherAI SOAR Fellow',
-                detail: 'Advised by Gonçalo Paulo (SPAR)',
+                detail: 'Advised by Gonçalo Paulo',
                 year: '2026'
               },
               {
