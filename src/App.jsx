@@ -168,12 +168,13 @@ const workshopPubs = [
   }
 ];
 
+// Newest first.
 const newsItems = [
+  { date: 'Jul 2026', text: 'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in classifiers.' },
   { date: 'Jun 2026', text: 'Joined Excipy LLC as an AI Engineer, building agentic evaluation systems for healthcare AI research.' },
-  { date: '2026', text: 'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in classifiers.' },
-  { date: '2026', text: 'Selected as an EleutherAI SOAR Fellow, working on hierarchy diagnostics for sparse autoencoders.' },
-  { date: '2026', text: 'Completed the BlueDot Impact AI Safety Technical and Frontier AI Governance courses.' },
-  { date: 'May 2026', text: 'Finished my MS in Computer Science at UNC Chapel Hill, advised by Prof. Shashank Srivastava.' }
+  { date: 'Jun 2026', text: 'Selected as an EleutherAI SOAR Fellow, working on hierarchy diagnostics for sparse autoencoders.' },
+  { date: 'May 2026', text: 'Finished my MS in Computer Science at UNC Chapel Hill, advised by Prof. Shashank Srivastava.' },
+  { date: 'May 2026', text: 'Completed the BlueDot Impact AI Safety Technical and Frontier AI Governance courses.' }
 ];
 
 const socialLinks = [
