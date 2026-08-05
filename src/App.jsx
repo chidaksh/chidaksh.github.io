@@ -16,7 +16,6 @@ import {
   FileDown,
   BookOpen,
   Trophy,
-  Send,
   MapPin,
   Calendar
 } from 'lucide-react';
@@ -64,7 +63,7 @@ const ProjectCard = ({ title, date, org, description, links }) => (
             rel="noopener noreferrer"
             className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all"
             title={link.label}
-            aria-label={`${title} — ${link.label}`}
+            aria-label={`${title}, ${link.label}`}
           >
             {link.icon === "code" ? <Code size={18} /> : link.icon === "play" ? <MonitorPlay size={18} /> : <ExternalLink size={18} />}
           </a>
@@ -169,6 +168,14 @@ const workshopPubs = [
   }
 ];
 
+const newsItems = [
+  { date: 'Jun 2026', text: 'Joined Excipy LLC as an AI Engineer, building agentic evaluation systems for healthcare AI research.' },
+  { date: '2026', text: 'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in classifiers.' },
+  { date: '2026', text: 'Selected as an EleutherAI SOAR Fellow, working on hierarchy diagnostics for sparse autoencoders.' },
+  { date: '2026', text: 'Completed the BlueDot Impact AI Safety Technical and Frontier AI Governance courses.' },
+  { date: 'May 2026', text: 'Finished my MS in Computer Science at UNC Chapel Hill, advised by Prof. Shashank Srivastava.' }
+];
+
 const socialLinks = [
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/chidaksh/', Icon: Linkedin },
   { label: 'GitHub', url: 'https://github.com/chidaksh', Icon: Github },
@@ -181,25 +188,39 @@ const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    const sections = ['about', 'news', 'experience', 'research', 'projects', 'teaching', 'skills', 'contact'];
+    const ACTIVATION_LINE = 140;
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      const sections = ['about', 'experience', 'research', 'projects', 'teaching', 'skills', 'contact'];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= 300) {
-            setActiveTab(section);
-          }
-        }
+
+      // The final section is usually shorter than the viewport, so the page runs
+      // out of scroll before its top can reach the activation line. Pin it at the
+      // bottom, otherwise the previously active tab stays lit on tall windows.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        setActiveTab(sections[sections.length - 1]);
+        return;
       }
+
+      // Active section is the last one whose top has crossed the line.
+      let current = sections[0];
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= ACTIVATION_LINE) current = id;
+      }
+      setActiveTab(current);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
     { label: 'About', href: '#about', id: 'about' },
+    { label: 'News', href: '#news', id: 'news' },
     { label: 'Experience', href: '#experience', id: 'experience' },
     { label: 'Research', href: '#research', id: 'research' },
     { label: 'Projects', href: '#projects', id: 'projects' },
@@ -276,7 +297,7 @@ const App = () => {
               Advancing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Reliable & Aligned</span> AI
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
-              AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable — causal verification of spurious shortcuts (<strong className="text-gray-900">UNMASK, COLM 2026</strong>), statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. MS CS from UNC Chapel Hill, advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong> — published at COLM and KDD.
+              I'm an AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable, from causally verifying the shortcuts a classifier leans on in <strong className="text-gray-900">UNMASK</strong> to statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. I finished my MS in Computer Science at UNC Chapel Hill, where I was advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong>, and my work has appeared at COLM and KDD.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <a href="mailto:chidakshravuru@gmail.com" className="bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl shadow-gray-200 flex items-center gap-3">
@@ -310,6 +331,20 @@ const App = () => {
         </div>
       </header>
 
+      {/* News */}
+      <Section id="news" title="News">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-sm divide-y divide-gray-100">
+          {newsItems.map((item, i) => (
+            <div key={i} className="flex flex-col sm:flex-row gap-1 sm:gap-8 p-6">
+              <span className="shrink-0 sm:w-28 font-mono text-xs font-black uppercase tracking-widest text-blue-600 sm:pt-1">
+                {item.date}
+              </span>
+              <p className="text-gray-600 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* Experience Section */}
       <Section id="experience" title="Professional Experience" className="bg-gray-50/50 rounded-[4rem]">
         <div className="space-y-12">
@@ -317,7 +352,7 @@ const App = () => {
             {
               date: 'Jun 2026 - Present',
               role: 'AI Engineer',
-              company: 'Excipy LLC — Remote',
+              company: 'Excipy LLC, Remote',
               points: [
                 'Built an end-to-end agentic system (Python, LangChain/LangGraph) that autonomously researches drugs, excipients, and market dynamics, validating its own outputs against structured rubrics and systematically flagging failure modes before they reach a user-facing product.',
                 'Designed and deployed retrieval and validation pipelines with structured tool use to extract, cross-check, and verify domain-specific data from unstructured sources, with human-in-the-loop review gates ensuring output reliability.'
@@ -326,9 +361,9 @@ const App = () => {
             {
               date: 'Aug 2024 - May 2026',
               role: 'Graduate Research Assistant',
-              company: 'UNC Chapel Hill — Advised by Prof. Shashank Srivastava',
+              company: 'UNC Chapel Hill, advised by Prof. Shashank Srivastava',
               points: [
-                'Built a fully automated evaluation pipeline that generates candidate spurious features as executable boolean expressions, filters them through a multi-stage statistical protocol with FDR control, and establishes causal model dependence via counterfactual interventions — achieving 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop.',
+                'Built a fully automated evaluation pipeline that generates candidate spurious features as executable boolean expressions, filters them through a multi-stage statistical protocol with FDR control, and establishes causal model dependence via counterfactual interventions, achieving 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop.',
                 'Generalized the pipeline to RewardBench2 reward model annotations without task-specific modification, surfacing spurious correlations such as prompt-response lexical overlap rewarding parroting over substantive quality. Accepted at COLM 2026.'
               ]
             },
@@ -343,7 +378,7 @@ const App = () => {
             },
             {
               date: 'Jan 2024 - May 2024',
-              role: 'Machine Learning Intern — Video Understanding',
+              role: 'Machine Learning Intern, Video Understanding',
               company: 'Indian Institute of Technology, Delhi',
               points: [
                 'Managed data design, collection, and evaluation for video-face recognition research in law enforcement scenarios.',
@@ -398,12 +433,12 @@ const App = () => {
       <Section id="projects" title="Core Projects">
         <div className="grid md:grid-cols-2 gap-8">
           <ProjectCard
-            title="UNMASK — Causal Verification of Spurious Shortcuts"
+            title="UNMASK, Causal Verification of Spurious Shortcuts"
             date="2025-2026"
             org="COLM 2026"
             description={[
               "Automated evaluation pipeline that generates candidate spurious features as executable boolean expressions, filters them through a multi-stage statistical protocol with FDR control, and establishes causal model dependence via counterfactual interventions.",
-              "Achieves 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop; independently rediscovers known lexical-overlap and negation biases across 6 NLI benchmarks."
+              "Achieves 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop. It also independently rediscovers the known lexical-overlap and negation biases across 6 NLI benchmarks."
             ]}
             links={[
               {icon: "external", label: "Paper", url: "https://drive.google.com/drive/folders/1DYjn6g6ElDhLHHg_rfeVNtLmYHx6Ruwp"}
@@ -423,12 +458,12 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="Unlearning Robustness — Signal × Attack Diagnostic Matrix"
+            title="Unlearning Robustness and the Signal × Attack Diagnostic Matrix"
             date="2026"
             org="AI Safety"
             description={[
               "Diagnostic framework testing whether LLM safety interventions genuinely remove target knowledge or leave deceptively intact residuals, computing attack-free static signals on unlearned checkpoints and testing whether each predicts vulnerability to its matched red-teaming attack.",
-              "Validated across 32 checkpoints (8 methods × 4 hyperparameter variants) on TOFU and WMDP under quantization, relearning, and direction-ablation attacks — weight-space distance significantly predicts attack recovery (ρ = −0.85, p < 0.001, BH-FDR q < 0.05), while no single static signal alone certifies safety."
+              "Validated across 32 checkpoints (8 methods × 4 hyperparameter variants) on TOFU and WMDP under quantization, relearning, and direction-ablation attacks. Weight-space distance significantly predicts attack recovery (ρ = −0.85, p < 0.001, BH-FDR q < 0.05), while no single static signal alone certifies safety."
             ]}
           />
           <ProjectCard
@@ -475,7 +510,7 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="Intelligent Planner — Dynamic LLM Query Router"
+            title="Intelligent Planner, a Dynamic LLM Query Router"
             date="2024"
             org="Full-Stack AI System"
             description={[
@@ -488,7 +523,7 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="PredictiveAgent — NL2PQL"
+            title="PredictiveAgent (NL2PQL)"
             date="2024"
             org="Kumo.ai Ecosystem"
             description={[
@@ -569,7 +604,7 @@ const App = () => {
                     <div className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></div>
                     <div>
                       <span className="font-bold text-gray-900 font-mono">{r.venue}</span>
-                      <span className="text-gray-400 text-sm ml-2">— {r.full}</span>
+                      <span className="text-gray-400 text-sm ml-2">{r.full}</span>
                     </div>
                   </div>
                 ))}
@@ -581,7 +616,7 @@ const App = () => {
                 <div className="w-2 h-2 rounded-full bg-blue-600 shrink-0 mt-2"></div>
                 <div>
                   <span className="font-bold text-gray-900">Space Data Science Club Secretary</span>
-                  <span className="text-gray-400 text-sm ml-2">— IIT Dharwad, 2021-2023</span>
+                  <span className="text-gray-400 text-sm ml-2">at IIT Dharwad, 2021-2023</span>
                   <p className="text-gray-600 text-sm mt-1">Directed a 30-member team and trained 50+ students in Python and data visualization.</p>
                 </div>
               </div>
@@ -616,7 +651,7 @@ const App = () => {
               },
               {
                 title: '4th Place',
-                detail: 'Inter IIT Tech Meet — Open Domain QA',
+                detail: 'Inter IIT Tech Meet, Open Domain QA',
                 year: '2023'
               },
               {
@@ -650,7 +685,7 @@ const App = () => {
                   <p className="text-blue-500 text-xs font-black uppercase tracking-widest mb-2 font-mono">2024 - 2026</p>
                   <h4 className="text-2xl font-bold mb-1">MS in Computer Science</h4>
                   <p className="text-gray-400 font-medium">UNC Chapel Hill</p>
-                  <p className="text-sm text-gray-500 mt-2">GPA 4.0/4.0 | Advised by Prof. Shashank Srivastava</p>
+                  <p className="text-sm text-gray-500 mt-2">GPA 4.0/4.0, advised by Prof. Shashank Srivastava</p>
                   <p className="text-sm text-gray-500 mt-1">Reliable ML, LLM Alignment & Evaluation</p>
                 </div>
                 <div className="relative pl-8 border-l-2 border-gray-800">
@@ -658,7 +693,7 @@ const App = () => {
                   <p className="text-gray-500 text-xs font-black uppercase tracking-widest mb-2 font-mono">2020 - 2024</p>
                   <h4 className="text-2xl font-bold mb-1">B.Tech in Computer Science</h4>
                   <p className="text-gray-400 font-medium">IIT Dharwad</p>
-                  <p className="text-sm text-gray-500 mt-2">GPA 9.24/10 | Advised by Prof. Prabuchandran K.J. & Prof. Rajshekhar Bhat</p>
+                  <p className="text-sm text-gray-500 mt-2">GPA 9.24/10, advised by Prof. Prabuchandran K.J. and Prof. Rajshekhar Bhat</p>
                 </div>
               </div>
             </div>
@@ -696,9 +731,6 @@ const App = () => {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.15),transparent_50%)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(99,102,241,0.1),transparent_50%)]"></div>
           <div className="max-w-3xl mx-auto text-center relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 font-mono">
-              <Send size={14} /> Get in Touch
-            </div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
               Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Together</span>
             </h2>
