@@ -96,11 +96,18 @@ const PubCard = ({ pub }) => (
             {i < arr.length - 1 && <span className="text-gray-900 font-bold">Chidaksh Ravuru</span>}
           </React.Fragment>
         ))}</p>
-        {pub.link && (
-          <a href={pub.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:gap-3 transition-all">
-            Read Paper <ChevronRight size={16} />
-          </a>
-        )}
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          {pub.link && (
+            <a href={pub.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:gap-3 transition-all">
+              Read Paper <ChevronRight size={16} />
+            </a>
+          )}
+          {pub.poster && (
+            <a href={pub.poster} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:gap-3 transition-all">
+              View Poster <ChevronRight size={16} />
+            </a>
+          )}
+        </div>
       </div>
     </div>
   </div>
@@ -110,15 +117,16 @@ const conferencePubs = [
   {
     year: '2026',
     venue: 'COLM 2026',
-    title: 'UNMASK: Discovering and Causally Verifying Spurious Shortcuts in Classifiers',
+    title: 'UNMASK: Discovering and Causally Verifying Spurious Shortcuts in Text Classifiers',
     authors: 'Chidaksh Ravuru, Shashank Srivastava',
-    link: 'https://drive.google.com/drive/folders/1DYjn6g6ElDhLHHg_rfeVNtLmYHx6Ruwp',
+    link: 'https://arxiv.org/abs/2608.09209',
+    poster: '/UNMASK_COLM2026_poster.pdf',
     classes: { bg: 'bg-orange-50', text: 'text-orange-600', badge: 'bg-orange-100 text-orange-700', border: 'hover:border-orange-200' }
   },
   {
     year: '2026',
-    venue: 'Preprint',
-    title: 'Can LLMs Understand What We Cannot Say? Measuring Multilevel Alignment Through Abortion Stigma',
+    venue: 'Under Review · CHI 2027',
+    title: 'Behavioral Coherence: A Method for Sensitive-Domain LLM Evaluation',
     authors: 'Anika Sharma, Malavika Mampally, Chidaksh Ravuru, Kandyce Brennan, Neil Gaikwad',
     link: 'https://arxiv.org/pdf/2512.13142',
     classes: { bg: 'bg-blue-50', text: 'text-blue-600', badge: 'bg-blue-100 text-blue-700', border: 'hover:border-blue-200' }
@@ -170,7 +178,22 @@ const workshopPubs = [
 
 // Newest first.
 const newsItems = [
-  { date: 'Jul 2026', text: 'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in classifiers.' },
+  {
+    date: 'Oct 2026',
+    text: 'Presenting UNMASK at COLM 2026 in San Francisco. Find me at Poster Session 6 on Thursday, Oct 8, 4:40 to 6:30 PM in the Grand Ballroom.',
+    link: { label: 'View the poster', url: '/UNMASK_COLM2026_poster.pdf' }
+  },
+  {
+    date: 'Sep 2026',
+    text: 'Submitted Behavioral Coherence, a method for evaluating LLMs in sensitive domains, to CHI 2027. The retitled preprint is on arXiv.',
+    link: { label: 'Read the preprint', url: 'https://arxiv.org/abs/2512.13142' }
+  },
+  {
+    date: 'Aug 2026',
+    text: 'The UNMASK camera-ready is on arXiv.',
+    link: { label: 'Read the paper', url: 'https://arxiv.org/abs/2608.09209' }
+  },
+  { date: 'Jul 2026', text:'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in text classifiers.' },
   { date: 'Jun 2026', text: 'Joined Excipy LLC as an AI Engineer, building agentic evaluation systems for healthcare AI research.' },
   { date: 'Jun 2026', text: 'Selected as an EleutherAI SOAR Fellow, working on hierarchy diagnostics for sparse autoencoders.' },
   { date: 'May 2026', text: 'Finished my MS in Computer Science at UNC Chapel Hill, advised by Prof. Shashank Srivastava.' },
@@ -287,18 +310,20 @@ const App = () => {
 
         <div className="relative max-w-5xl mx-auto px-6 grid md:grid-cols-5 gap-16 items-center">
           <div className="md:col-span-3 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-mono uppercase tracking-wider mb-6">
+            {/* Temporary for COLM week. After Oct 9, revert to a plain div reading
+                "Open to Research & Industry Roles". */}
+            <a href="#news" className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-mono uppercase tracking-wider mb-6 hover:bg-blue-100 transition-colors">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
               </span>
-              Open to Research &amp; Industry Roles
-            </div>
+              Presenting at COLM 2026 · Thu Oct 8
+            </a>
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-8 leading-tight">
               Advancing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Reliable & Aligned</span> AI
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
-              I'm an AI engineer and researcher working on <strong className="text-gray-900">LLM evaluation and safety</strong>. I build systems that test whether models are actually reliable, from causally verifying the shortcuts a classifier leans on in <strong className="text-gray-900">UNMASK</strong> to statistically rigorous LLM-as-judge evaluation, unlearning robustness, and interpretability. I finished my MS in Computer Science at UNC Chapel Hill, where I was advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong>, and my work has appeared at COLM and KDD.
+              I'm an AI engineer and researcher working on <strong className="text-gray-900">AI safety and evaluation</strong>. I test whether the signal that certifies a model tracks the behavior you care about. In <strong className="text-gray-900">UNMASK</strong> (COLM 2026) I causally verify which shortcuts a classifier relies on, and I run the same audit on reward-model preference data. I have tested whether unlearning survives real attacks and built the statistics an LLM judge needs before anyone trusts its scores. I finished my MS in Computer Science at UNC Chapel Hill, advised by <strong className="text-gray-900">Prof. Shashank Srivastava</strong>, and my work has appeared at COLM and KDD.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <a href="mailto:chidakshravuru@gmail.com" className="bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl shadow-gray-200 flex items-center gap-3">
@@ -340,7 +365,17 @@ const App = () => {
               <span className="shrink-0 sm:w-28 font-mono text-xs font-black uppercase tracking-widest text-blue-600 sm:pt-1">
                 {item.date}
               </span>
-              <p className="text-gray-600 leading-relaxed">{item.text}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {item.text}
+                {item.link && (
+                  <>
+                    {' '}
+                    <a href={item.link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 font-bold hover:gap-2 transition-all whitespace-nowrap">
+                      {item.link.label} <ChevronRight size={14} />
+                    </a>
+                  </>
+                )}
+              </p>
             </div>
           ))}
         </div>
@@ -355,8 +390,8 @@ const App = () => {
               role: 'AI Engineer',
               company: 'Excipy LLC, Remote',
               points: [
-                'Built an end-to-end agentic system (Python, LangChain/LangGraph) that autonomously researches drugs, excipients, and market dynamics, validating its own outputs against structured rubrics and systematically flagging failure modes before they reach a user-facing product.',
-                'Designed and deployed retrieval and validation pipelines with structured tool use to extract, cross-check, and verify domain-specific data from unstructured sources, with human-in-the-loop review gates ensuring output reliability.'
+                'Audited a hand-curated evidence table against live PharmGKB records and found 6 of 17 entries mislabeled, including one marked as strong clinical evidence that the source backs with a single case report. Used that audit to argue for rebuilding the table rather than patching it.',
+                'Shipped the rebuild as an agentic pipeline (Python, LangChain/LangGraph) that retrieves across 7 regulatory and scientific databases, scaling the table from 17 records to 334 across 78 drugs, each traceable to its source and gated behind human review.'
               ]
             },
             {
@@ -364,8 +399,8 @@ const App = () => {
               role: 'Graduate Research Assistant',
               company: 'UNC Chapel Hill, advised by Prof. Shashank Srivastava',
               points: [
-                'Built a fully automated evaluation pipeline that generates candidate spurious features as executable boolean expressions, filters them through a multi-stage statistical protocol with FDR control, and establishes causal model dependence via counterfactual interventions, achieving 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop.',
-                'Generalized the pipeline to RewardBench2 reward model annotations without task-specific modification, surfacing spurious correlations such as prompt-response lexical overlap rewarding parroting over substantive quality. Accepted at COLM 2026.'
+                'Built UNMASK, a fully automated pipeline that writes candidate shortcuts as executable boolean functions, filters them through statistical validation with independent replication and FDR control, and counts one as real only after a counterfactual intervention confirms the model relies on it. It verified 9 of 10 features on BERT and improved HANS accuracy by up to 12.58 pp while keeping MNLI-matched within 1.2 pp.',
+                'Used the verified features as annotation-free groups for Deep Feature Reweighting, reaching 71.8% worst-group accuracy on CivilComments with no demographic labels, on par with hand-labeled groups (70.1%). Run unmodified on RewardBench2, the pipeline found preference labels tracking refusal phrasing and response length. Accepted at COLM 2026.'
               ]
             },
             {
@@ -420,7 +455,7 @@ const App = () => {
       {/* Research Section — placed before Projects so publications are the
           first substantive block a visitor scrolls into. */}
       <Section id="research" title="Research & Publications">
-        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Conference & Journal Papers</h3>
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Papers & Preprints</h3>
         <div className="grid gap-6 mb-16">
           {conferencePubs.map((pub, idx) => <PubCard key={idx} pub={pub} />)}
         </div>
@@ -432,26 +467,49 @@ const App = () => {
 
       {/* Featured Projects */}
       <Section id="projects" title="Core Projects">
-        <div className="grid md:grid-cols-2 gap-8">
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">AI Safety & Evaluation</h3>
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           <ProjectCard
             title="UNMASK, Causal Verification of Spurious Shortcuts"
             date="2025-2026"
             org="COLM 2026"
             description={[
-              "Automated evaluation pipeline that generates candidate spurious features as executable boolean expressions, filters them through a multi-stage statistical protocol with FDR control, and establishes causal model dependence via counterfactual interventions.",
-              "Achieves 81% causal reliance reduction and +12.7pp adversarial robustness on HANS with only 1.2pp in-distribution drop. It also independently rediscovers the known lexical-overlap and negation biases across 6 NLI benchmarks."
+              "Discovers, causally verifies, and mitigates spurious shortcuts in text classifiers without human annotation. It rediscovers the known lexical-overlap and negation biases in MNLI on its own, verifies 9 of 10 candidate features on BERT and 6 on RoBERTa, and lifts HANS accuracy by up to 12.58 pp.",
+              "Run unmodified on RewardBench2, it shows preference labels tracking surface form. In the Safety subset, refusal phrasing on personal-information prompts predicts the chosen response at an odds ratio of 161, and the label-neutral Ties subset still penalizes responses much longer than the prompt."
             ]}
             links={[
-              {icon: "external", label: "Paper", url: "https://drive.google.com/drive/folders/1DYjn6g6ElDhLHHg_rfeVNtLmYHx6Ruwp"}
+              {icon: "external", label: "Paper", url: "https://arxiv.org/abs/2608.09209"},
+              {icon: "play", label: "Poster", url: "/UNMASK_COLM2026_poster.pdf"}
             ]}
           />
           <ProjectCard
-            title="LLM-as-Judge Evaluation with Statistical Rigor"
+            title="Unlearning Robustness: Does the Certifying Signal Survive Attack?"
+            date="2026"
+            org="AI Safety"
+            description={[
+              "Tested whether the cheap static signals used to certify an unlearning method predict whether it survives a real attack, computing each signal on 32 checkpoints (8 methods × 4 hyperparameter variants) on TOFU and WMDP against its matched attack (quantization, relearning, or direction ablation).",
+              "Weight-space distance predicts attack recovery (ρ = −0.85, p < 0.001, BH-FDR q < 0.05), but no single static signal certifies safety. The proxy and the property came apart under direct test."
+            ]}
+          />
+          <ProjectCard
+            title="Trace-Level Failure Taxonomy for Tool-Using Agents"
+            date="2026"
+            org="Agent Evaluation"
+            description={[
+              "Hand-annotated 500 ToolBench execution traces at step level, separating tool-selection errors, argument errors, and hallucinated API calls into a behavioral taxonomy instead of a single pass/fail score.",
+              "Turned the taxonomy into a preference dataset and DPO-trained Llama-3.1-8B on it, improving tool-selection accuracy by 9% and cutting hallucinated API calls by 22% on a held-out set of 100 tasks."
+            ]}
+            links={[
+              {icon: "external", label: "Dataset", url: "https://github.com/OpenBMB/ToolBench"}
+            ]}
+          />
+          <ProjectCard
+            title="Grader Telemetry for LLM-as-Judge Evaluation"
             date="2026"
             org="Evaluation Methodology"
             description={[
-              "Evaluated frontier LLMs as automated judges across 5 behavioral dimensions with bootstrap confidence intervals, Cohen's d effect sizes, Krippendorff's alpha for inter-rater reliability, and position-bias detection.",
-              "Applied causal minimal-pair testing to isolate single-dimension effects on output quality, validating rubric sensitivity with dimension-weighted scoring and close-call detection via paired bootstrap testing."
+              "Built the observability layer a judge needs before anyone trusts its scores, with per-element attribution, judge self-consistency via Krippendorff's alpha, and position-bias detection, all surfaced in a React dashboard instead of a results table.",
+              "Wrote the statistics underneath, including paired-bootstrap hierarchical resampling, Cohen's d, and a minimum-detectable-effect test that reports a gap inside the noise floor as a close call rather than a winner."
             ]}
             links={[
               {icon: "code", label: "Code", url: "https://github.com/chidaksh/gallium"},
@@ -459,16 +517,16 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="Unlearning Robustness and the Signal × Attack Diagnostic Matrix"
+            title="Tracing a False Win in an Automated Optimization Loop"
             date="2026"
-            org="AI Safety"
+            org="Independent"
             description={[
-              "Diagnostic framework testing whether LLM safety interventions genuinely remove target knowledge or leave deceptively intact residuals, computing attack-free static signals on unlearned checkpoints and testing whether each predicts vulnerability to its matched red-teaming attack.",
-              "Validated across 32 checkpoints (8 methods × 4 hyperparameter variants) on TOFU and WMDP under quantization, relearning, and direction-ablation attacks. Weight-space distance significantly predicts attack recovery (ρ = −0.85, p < 0.001, BH-FDR q < 0.05), while no single static signal alone certifies safety."
+              "Integrated GEPA, a reflective prompt optimizer, with Inspect AI's agent evaluation harness at GEPA's native extension seam, working from the unfamiliar source instead of wrapping the public API and keeping the real eval-scorer boundary unmocked.",
+              "A validation-selected candidate beat the seed prompt and then regressed on held-out data. Per-sample analysis traced the regression to an undersized validation set, and a rerun at larger size rejected every overfit candidate and kept the seed. Reported both runs, including the failed one."
             ]}
           />
           <ProjectCard
-            title="Does Structure Survive Scale? Diagnosing Hierarchy in SAEs"
+            title="Do SAE Hierarchy Methods Hold Up on a Real LLM?"
             date="2026"
             org="EleutherAI SOAR"
             description={[
@@ -476,18 +534,9 @@ const App = () => {
               "Designing controlled PCFG experiments with tunable distributional properties to isolate which properties of natural language cause hierarchy recovery to fail, benchmarking SAEs trained on PCFG transformer activations against TinyStories and Gemma Scope."
             ]}
           />
-          <ProjectCard
-            title="Agent Post-Training via Execution Trace Reward Modeling"
-            date="2026"
-            org="Agentic Post-Training"
-            description={[
-              "Sampled and annotated 500 ToolBench execution traces with step-level outcome labels (correct tool selection, argument errors, hallucinated APIs) to construct a structured preference dataset for DPO post-training.",
-              "Fine-tuned Llama-3.1-8B via DPO, improving tool-selection accuracy by 9% and reducing hallucinated API calls by 22% on a held-out set of 100 ToolBench tasks versus the base instruction-tuned model."
-            ]}
-            links={[
-              {icon: "external", label: "Dataset", url: "https://github.com/OpenBMB/ToolBench"}
-            ]}
-          />
+        </div>
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-6 font-mono">Earlier Work</h3>
+        <div className="grid md:grid-cols-2 gap-8">
           <ProjectCard
             title="OncoAgentMTB"
             date="2025"
@@ -570,7 +619,7 @@ const App = () => {
                   role: 'Graduate Teaching Assistant',
                   org: 'UNC School of Data Science and Society, DATA 110',
                   date: '2025 - 2026',
-                  detail: 'Lead lab recitations covering probability, statistics, and Python for 60+ undergraduates in Intro to Data Science.'
+                  detail: 'Led lab recitations covering probability, statistics, and Python for 60+ undergraduates in Intro to Data Science.'
                 },
                 {
                   role: 'Undergraduate Teaching Assistant',
@@ -596,8 +645,7 @@ const App = () => {
               <h4 className="font-bold text-gray-900 mb-4">Conference Reviewer</h4>
               <div className="space-y-3">
                 {[
-                  { venue: 'EMNLP', full: 'Empirical Methods in Natural Language Processing' },
-                  { venue: 'ICLR', full: 'International Conference on Learning Representations' },
+                  { venue: 'ACL', full: 'Association for Computational Linguistics' },
                   { venue: 'COLM', full: 'Conference on Language Modeling' },
                   { venue: 'AIES', full: 'AAAI/ACM Conference on AI, Ethics, and Society' }
                 ].map((r, i) => (
@@ -704,7 +752,7 @@ const App = () => {
                 <ShieldCheck className="text-blue-500" /> Core Interests
               </h2>
               <div className="flex flex-wrap gap-3">
-                {["Evaluation Methodology", "Red-Teaming", "Adversarial Robustness", "Interpretability / SAEs", "Machine Unlearning", "LLM Alignment", "RLHF / DPO", "Reliable ML", "Agentic Orchestration", "Multimodal Safety", "Medical AI"].map(s => (
+                {["Reward & Verifier Auditing", "Evaluation Design", "LLM-as-Judge Validation", "Agent Trace Analysis", "Shortcut & Benchmark Auditing", "Adversarial Robustness", "Machine Unlearning", "Interpretability / SAEs", "Causal Verification", "Post-Training (DPO, RM, PRM)"].map(s => (
                   <span key={s} className="px-5 py-3 bg-blue-500/10 border border-blue-500/30 rounded-2xl text-blue-400 font-semibold text-sm">
                     {s}
                   </span>
@@ -715,7 +763,7 @@ const App = () => {
                 <Zap className="text-blue-500" /> Technical Stack
               </h2>
               <div className="flex flex-wrap gap-2">
-                {["Python", "PyTorch", "JAX", "HuggingFace", "PEFT/LoRA", "TransformerLens", "OpenUnlearning", "Inspect AI", "LangChain", "LangGraph", "LlamaIndex", "vLLM", "FAISS", "Weights & Biases", "Slurm", "Docker", "AWS", "React", "TypeScript"].map(s => (
+                {["Python", "PyTorch", "JAX", "C++", "HuggingFace", "TRL", "PEFT/LoRA", "TransformerLens", "OpenUnlearning", "Inspect AI", "LangChain", "LangGraph", "LlamaIndex", "vLLM", "FAISS", "Weights & Biases", "Slurm", "Docker", "AWS", "FastAPI", "React", "TypeScript"].map(s => (
                   <span key={s} className="px-4 py-2 bg-gray-800 rounded-xl text-sm font-medium border border-gray-700">
                     {s}
                   </span>
