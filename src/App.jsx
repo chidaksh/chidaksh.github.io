@@ -483,6 +483,15 @@ const App = () => {
             ]}
           />
           <ProjectCard
+            title="Does Structure Survive Scale? Diagnosing Hierarchy in SAEs"
+            date="2026"
+            org="EleutherAI SOAR"
+            description={[
+              "Building a coverage-based diagnostic suite within an EleutherAI research pod, advised by Gonçalo Paulo, evaluating whether hierarchy-recovery methods (Matryoshka SAEs, Temporal SAEs, Temporal Feature Analysis) produce coherent parent-child feature structures on Gemma-2-2B.",
+              "Designing controlled PCFG experiments with tunable distributional properties to isolate which properties of natural language cause hierarchy recovery to fail, benchmarking SAEs trained on PCFG transformer activations against TinyStories and Gemma Scope."
+            ]}
+          />
+          <ProjectCard
             title="Unlearning Robustness: Can Cheap Signals Predict Relearning?"
             date="2026"
             org="AI Safety"
@@ -523,15 +532,6 @@ const App = () => {
             description={[
               "Integrated GEPA, a reflective prompt optimizer, with Inspect AI's agent evaluation harness at GEPA's native extension seam, working from the unfamiliar source instead of wrapping the public API and keeping the real eval-scorer boundary unmocked.",
               "A validation-selected candidate beat the seed prompt and then regressed on held-out data. Per-sample analysis traced the regression to an undersized validation set, and a rerun at larger size rejected every overfit candidate and kept the seed. Reported both runs, including the failed one."
-            ]}
-          />
-          <ProjectCard
-            title="Does Structure Survive Scale? Diagnosing Hierarchy in SAEs"
-            date="2026"
-            org="EleutherAI SOAR"
-            description={[
-              "Building a coverage-based diagnostic suite within an EleutherAI research pod, advised by Gonçalo Paulo, evaluating whether hierarchy-recovery methods (Matryoshka SAEs, Temporal SAEs, Temporal Feature Analysis) produce coherent parent-child feature structures on Gemma-2-2B.",
-              "Designing controlled PCFG experiments with tunable distributional properties to isolate which properties of natural language cause hierarchy recovery to fail, benchmarking SAEs trained on PCFG transformer activations against TinyStories and Gemma Scope."
             ]}
           />
         </div>
