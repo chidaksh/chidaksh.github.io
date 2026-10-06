@@ -194,7 +194,7 @@ const newsItems = [
     link: { label: 'Read the paper', url: 'https://arxiv.org/abs/2608.09209' }
   },
   { date: 'Jul 2026', text:'UNMASK was accepted at COLM 2026, on discovering and causally verifying spurious shortcuts in text classifiers.' },
-  { date: 'Jun 2026', text: 'Joined Excipy LLC as an AI Engineer, building agentic evaluation systems for healthcare AI research.' },
+  { date: 'Jun 2026', text: 'Joined Excipy LLC as an AI Engineer, building an LLM pharma-analysis pipeline that grounds each number in a cited source.' },
   { date: 'Jun 2026', text: 'Selected as an EleutherAI SOAR Fellow, working on hierarchy diagnostics for sparse autoencoders.' },
   { date: 'May 2026', text: 'Finished my MS in Computer Science at UNC Chapel Hill, advised by Prof. Shashank Srivastava.' },
   { date: 'May 2026', text: 'Completed the BlueDot Impact AI Safety Technical and Frontier AI Governance courses.' }
@@ -390,8 +390,8 @@ const App = () => {
               role: 'AI Engineer',
               company: 'Excipy LLC, Remote',
               points: [
-                'Audited a hand-curated evidence table against live PharmGKB records and found 6 of 17 entries mislabeled, including one marked as strong clinical evidence that the source backs with a single case report. Used that audit to argue for rebuilding the table rather than patching it.',
-                'Shipped the rebuild as an agentic pipeline (Python, LangChain/LangGraph) that retrieves across 7 regulatory and scientific databases, scaling the table from 17 records to 334 across 78 drugs, each traceable to its source and gated behind human review.'
+                'Audited a hand-typed pharmacogenomic evidence table against live PharmGKB and found 6 of 17 rows claiming grades the source did not support. Replaced it with 334 generated rows across 78 drugs, each tied to its source annotation, and added a second-vendor model that verifies every extracted non-response rate.',
+                "Designing the platform's backend, which stores every pipeline run in S3 by drug and configuration so a repeat search becomes a lookup, and keeps companies, licences and approval rules in one reference database that a person approves before each scheduled refresh, with alerts when a rule's quoted legal text changes."
               ]
             },
             {
@@ -483,12 +483,12 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="Unlearning Robustness: Does the Certifying Signal Survive Attack?"
+            title="Unlearning Robustness: Can Cheap Signals Predict Relearning?"
             date="2026"
             org="AI Safety"
             description={[
-              "Tested whether the cheap static signals used to certify an unlearning method predict whether it survives a real attack, computing each signal on 32 checkpoints (8 methods × 4 hyperparameter variants) on TOFU and WMDP against its matched attack (quantization, relearning, or direction ablation).",
-              "Weight-space distance predicts attack recovery (ρ = −0.85, p < 0.001, BH-FDR q < 0.05), but no single static signal certifies safety. The proxy and the property came apart under direct test."
+              "Pre-registered a test of whether cheap, attack-free signals on an unlearned checkpoint predict how much knowledge an attack recovers, across 8 methods and 32 OpenUnlearning Llama-3.2-1B checkpoints on TOFU. Quantization and direction ablation recovered nothing at this scale, so the test ran on relearning.",
+              "No signal predicted recovery across methods. A ρ = +0.90 on 5 checkpoints fell to −0.35 on 27, and leave-one-method-out was at chance (3/8). Weight distance's ρ = −0.85 came from within each method's sweep."
             ]}
           />
           <ProjectCard
@@ -526,7 +526,7 @@ const App = () => {
             ]}
           />
           <ProjectCard
-            title="Do SAE Hierarchy Methods Hold Up on a Real LLM?"
+            title="Does Structure Survive Scale? Diagnosing Hierarchy in SAEs"
             date="2026"
             org="EleutherAI SOAR"
             description={[
